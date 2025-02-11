@@ -1,4 +1,4 @@
-# cleark-game-integration
+# clerk-demo-integration
 
 Updated version of Mamma Mia quiz game with Clerk integration.
 
