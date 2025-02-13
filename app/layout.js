@@ -1,3 +1,12 @@
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
+
 import { Analytics } from "@vercel/analytics/react";
 
 import { Bodoni_Moda } from "next/font/google";
@@ -17,17 +26,28 @@ export const metadata = {
 
 function RootLayout({ children }) {
   return (
-    <html lang="en" className={bodiniModa.className}>
-      <body>
-        <div className="flex flex-col items-center justify-center min-h-screen bg-cyan-50">
-          <div className="flex flex-col bg-sky-950 rounded-2xl w-3/4 h-[40rem] text-white text-center items-center justify-center">
-            {children}
-            <Analytics />
+    <ClerkProvider>
+      <html lang="en" className={bodiniModa.className}>
+        <body>
+          <header className="flex items-center justify-end p-4 gap-4 h-16 bg-sky-950 text-white mb-2">
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </header>
+          <div className="flex flex-col items-center justify-center min-h-screen bg-cyan-50">
+            <div className="flex flex-col bg-sky-950 rounded-2xl w-3/4 h-[40rem] text-white text-center items-center justify-center">
+              {children}
+              <Analytics />
+            </div>
+            <CustomFooter />
           </div>
-          <CustomFooter />
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
 
